@@ -7,29 +7,13 @@ const App: React.FC = () => {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [editingLog, setEditingLog] = useState<LogEntry | null>(null);
   const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
-  console.log('logs', logs);
-//   useEffect(() => {
-//   setLogs([{
-//     id: 'test1',
-//     userName: 'r1',
-//     description: 'test',
-//     date: '11/07/23',
-//     location: 'irvine'
-//   }])
-// },logs);
   const fetchLogs = async () => {
     const res = await fetch('http://localhost:4000/logs');
     if (res) {
       console.log('changed logs', res.body);
       setLogs(await res.json());
     }
-
   };
-
-  // useEffect(() => {
-  //   fetchLogs();
-  // }, [fetchLogs]);
-
 
   useEffect(() => {
     fetchLogs();
@@ -56,7 +40,6 @@ const App: React.FC = () => {
   const handleEdit = (log: LogEntry) => {
     setEditingLog(log);
   };
-
 
   return (
     <div className="container">
